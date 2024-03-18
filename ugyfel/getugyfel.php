@@ -6,7 +6,7 @@ if(count($keresSzoveg) > 1){
         $sql = "SELECT * FROM ugyfel WHERE azon=" . $keresSzoveg[1];
     }else{
         http_response_code(404);
-        echo 'Nem létező ügyfél';
+        echo 'Nem létező ügyfél.';
     }
 }else{
     $sql = "SELECT * FROM `ugyfel` WHERE 1";
@@ -22,5 +22,5 @@ if($result->num_rows > 0){
     echo json_encode($ugyfelek);
 }else{
     http_response_code(404);
-    echo 'Nem létező ügyfél';
+    echo 'Nem létező ügyfél.';
 }

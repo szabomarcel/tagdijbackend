@@ -10,13 +10,13 @@ $szulev =2005;
 $irszam=4030;	
 $orsz="H";
 require_once './databaseconnect.php';
-$sql = "DELETE FROM `ugyfel` WHERE 1";
+$sql = "DELETE FROM `ugyfel` WHERE `azon`='?'";
 $stmt->$connection->prepare($sql);
 $stml->bind_param("isiis", $azon, $nev, $szulev, $irszam, $orsz);
 if($stmt->execute()){
     http_response_code(201);
-    echo 'Sikeresen hozzáadva';
+    echo 'Sikeresen lett törölve.';
 }else{
     http_response_code(404);
-    echo 'Nem sikerült hozzáadni';
+    echo 'Nem sikerült törölni még.';
 }

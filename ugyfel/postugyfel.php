@@ -15,8 +15,8 @@ $stmt->$connection->prepare($sql);
 $stml->bind_param("isiis", $azon, $nev, $szulev, $irszam, $orsz);
 if($stmt->execute()){
     http_response_code(201);
-    echo 'Sikeresen hozzáadva';
+    echo 'Sikeresen hozzáadva.';
 }else{
     http_response_code(404);
-    echo 'Nem sikerült hozzáadni';
+    echo 'Nem sikerült hozzáadni.';
 }
