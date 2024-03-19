@@ -1,19 +1,26 @@
 <?php
-/*$azon = $_POST ["azon"];
-$nev = $_POST ["nev"];
-$szulev = $_POST ["szulev"];
-$irszam = $_POST ["irszam"];
-$orszag = $_POST ["orsz"];*/
-$azon=2002;
+$putadat = fopen("php://input", "r");
+$raw_data = '';
+while ($chunk = fread($putadat, 1024))
+    $raw_data.= $chunk;
+fclose($putadat);
+$adatJSON = json_decode($raw_data);
+$azon = $adatJSON -> azon;
+$nev = $adatJSON -> nev;
+$szulev = $adatJSON -> szulev;
+$irszam = $adatJSON -> irszam;
+$orsz = $adatJSON -> orsz;
+/*azon=2002;
 $nev="Géza";	
 $szulev =2005;
 $irszam=4030;	
-$orsz="H";
+$orsz="H";*/
+// bejövő adatok rendelkezésünkre állnak, kiírjuk az adatokat
 require_once './databaseconnect.php';
-$sql = "UPDATE `ugyfel` SET `azon`='?',`nev`='?',`szulev`='?',`irszam`='?',`orsz`='?' WHERE 1";
-$stmt->$conn->prepare($sql);
-$stml->bind_param("isiis", $azon, $nev, $szulev, $irszam, $orsz);
-if($stmt->execute()){
+$sql = "UPDATE ugyfel SET `nev`=?,`szulev`=?,`irszam`=?,`orsz`=? WHERE azon=?";
+$stml = $connection->prepare($sql);
+$stml->bind_param("siisi", $nev, $szulev, $irszam, $orsz, $azon);
+if($stml->execute()){
     http_response_code(201);
     echo 'Sikeresen lett modósítva.';
 }else{
